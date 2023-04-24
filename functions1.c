@@ -43,10 +43,12 @@ int print_string(va_list types, char buffer[], int flags,
 	{
 		s = "(null)";
 		if (precision >= 6)
-			str = "      ";
+			s = "      ";
 	}
 	while (s[len] != '\0')
 		len++;
+	if (precision >= 0 && precision < len)
+		len = precision;
 	if (width > len)
 	{
 		if (flags & F_MINUS)
@@ -109,7 +111,7 @@ int print_int(va_list types, char buffer[], int flags,
 	if (x == 0)
 		buffer[i--] = '0';
 	buffer[BUFF_SIZE - 1] = '0';
-	n = (unsigned long int);
+	n = (unsigned long int)x;
 
 	if (x < 0)
 	{

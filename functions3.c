@@ -12,8 +12,8 @@
 int print_pointer(va_list types, char buffer[],
 	int flags, int width, int size, int precision);
 {
-	char padd = ' ', c = 0;
-	int i = BUFF_SIZE - 2, len = 2, padd_begin = 1;
+	char padd = ' ', extra_c = 0;
+	int i = BUFF_SIZE - 2, len = 2, padd_start = 1;
 	unsigned long n_addrs;
 	char map[] = "0123456789abcdef";
 	void *addrs = va_arg(types, void *);
@@ -25,7 +25,7 @@ int print_pointer(va_list types, char buffer[],
 	buffer[BUFF_SIZE - 1] = '\0';
 	UNUSED(precision);
 	n_addrs = (unsigned long)addrs;
-	while (num_addrs > 0)
+	while (n_addrs > 0)
 	{
 		buffer[i--] = map[n_addrs % 16];
 		n_addrs /= 16;
@@ -34,11 +34,12 @@ int print_pointer(va_list types, char buffer[],
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		padd = '0';
 	if (flags & F_PLUS)
-		c = '+', len++;
+		extra_c = '+', len++;
 	else if (flags & F_SPACE)
-		c = ' ', len++;
+		extra_c = ' ', len++;
 	i++;
-	return (write_pointer(buffer, i, len, width, flags, padd, padd_begin, c));
+	return (write_pointer(buffer, i, len, width, flags, padd, extra_c,
+				padd_start));
 }
 /**
  * print_non_printable - Prints ascii codes in hexa of non printable chars
@@ -65,7 +66,7 @@ int print_non_printable(va_list types, char buffer[],
 		return (write(1, "(null)", 6));
 	while (s[i] != '\0')
 	{
-		if (is_pritable(s[i]))
+		if (is_printable(s[i]))
 			buffer[i + offset] = s[i];
 		else
 			offset += append_hexa_code(s[i], buffer, i + offset);
@@ -142,7 +143,7 @@ int print_rot13string(va_list types, char buffer[],
 	{
 		for (j = 0; in[j]; j++)
 		{
-			if (in[j] == s[j])
+			if (in[j] == s[i])
 			{
 				x = out[j];
 				write(1, &x, 1);

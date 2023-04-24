@@ -109,9 +109,10 @@ int print_hexa(va_list types, char map[], char buffer[], int flags,
 {
 	int i = BUFF_SIZE - 2;
 	unsigned long int n = va_arg(types, unsigned long int);
+	unsigned long int init_n = n;
 
 	UNUSED(width);
-	n = conver_size_unsgnd(n, size);
+	n = convert_size_unsgnd(n, size);
 	if (n == 0)
 		buffer[i--] = '0';
 	buffer[BUFF_SIZE - 1] = '\0';

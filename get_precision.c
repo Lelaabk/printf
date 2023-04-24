@@ -13,7 +13,7 @@ int get_precision(const char *format, int *i, va_list list)
 
 	if (format[curr_i] != '.')
 		return (prc);
-	p = 0;
+	prc = 0;
 	for (curr_i += 1; format[curr_i] != '\0'; curr_i++)
 	{
 		if (is_digit(format[curr_i]))
