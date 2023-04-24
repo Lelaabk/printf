@@ -10,7 +10,7 @@
  * Return: Number of chars printed.
  */
 int print_pointer(va_list types, char buffer[],
-	int flags, int width, int size, int precision);
+	int flags, int width, int size, int precision)
 {
 	char padd = ' ', extra_c = 0;
 	int i = BUFF_SIZE - 2, len = 2, padd_start = 1;

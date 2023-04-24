@@ -49,10 +49,10 @@ int print_octal(va_list types, char buffer[], int flags,
 	if (n == 0)
 		buffer[i--] = '0';
 	buffer[BUFF_SIZE - 1] = '\0';
-	while (num > 0)
+	while (n > 0)
 	{
-		buffer[i--] = (num % 8) + '0';
-		num /= 8;
+		buffer[i--] = (n % 8) + '0';
+		n /= 8;
 	}
 	if (flags & F_HASH && init_n != 0)
 		buffer[i--] = '0';

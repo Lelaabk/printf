@@ -140,7 +140,7 @@ int print_binary(va_list types, char buffer[], int flags,
 		int width, int size, int precision)
 {
 	int c;
-	unsigned int n, m, i, res, ar[32];
+	unsigned int n, m, i, res, arr[32];
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -156,7 +156,7 @@ int print_binary(va_list types, char buffer[], int flags,
 		m /= 2;
 		arr[i] = (n / m) % 2;
 	}
-	for (i = 0; res = 0, c = 0; i < 32; i++)
+	for (i = 0, res = 0, c = 0; i < 32; i++)
 	{
 		res += arr[i];
 		if (res || i == 31)
