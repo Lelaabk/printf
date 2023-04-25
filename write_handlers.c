@@ -43,10 +43,9 @@ int handle_write_char(char c, char buffer[],
 }
 
 /**
- *write_number - string
+ *write_number - strings
  *@is_negative: arguments
- *@ind: characters types.
- *@c: types
+ *@ind: characters types
  *@buffer: array for print
  *@flags: active flags.
  *@width: width.
@@ -54,6 +53,7 @@ int handle_write_char(char c, char buffer[],
  *@size: size
  *Return: Number of chars printed.
  */
+
 int write_number(int is_negative, int ind, char buffer[],
 	int flags, int width, int precision, int size)
 {
